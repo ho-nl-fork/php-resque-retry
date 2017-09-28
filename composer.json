@@ -1,5 +1,5 @@
 {
-    "name": "jaaprood/php-resque-retry",
+    "name": "ho-nl-fork/php-resque-retry",
     "description": "A php-resque plugin; provides retry, delay and exponential backoff support to php-resque jobs",
     "require": {
         "chrisboulton/php-resque": "dev-master",
