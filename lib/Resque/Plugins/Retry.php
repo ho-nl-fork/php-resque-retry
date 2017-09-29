@@ -11,8 +11,8 @@ class Retry {
 	 *
 	 * Will attempt to retry the job if all retry criterias pass
 	 * 
-	 * @param  	Exception 	$exception
-	 * @param 	Resque_Job 	$job
+	 * @param  	\Exception 	$exception
+	 * @param 	\Resque_Job 	$job
 	 */
 	public function onFailure($exception, $job) {
 		if ($this->retryCriteriaValid($exception, $job)) {
@@ -29,7 +29,7 @@ class Retry {
 	 *
 	 * Sets up the tracking of the of the amount of attempts trying to perform this job
 	 * 
-	 * @param 	Resque_Job 	$job
+	 * @param 	\Resque_Job 	$job
 	 */
 	public function beforePerform($job) {
 		// Keep track of the number of retry attempts
@@ -49,7 +49,7 @@ class Retry {
 	 * Cleans up any data we've tracked for retrying now that the job has been successfully 
 	 * performed.
 	 * 
-	 * @param 	Resque_Job 	$job
+	 * @param 	\Resque_Job 	$job
 	 */
 	public function afterPerform($job) {
 		$this->cleanRetryKey($job);
@@ -59,8 +59,8 @@ class Retry {
 	/**
 	 * Retry the job
 	 *
-	 * @param 	Exception 	$exception 	the exception that caused the job to fail
-	 * @param  	Resque_Job	$job 		the job that failed and should be retried
+	 * @param 	\Exception 	$exception 	the exception that caused the job to fail
+	 * @param  	\Resque_Job	$job 		the job that failed and should be retried
 	 */
 	protected function tryAgain($exception, $job) {
 		$retryDelay = $this->retryDelay($job);
@@ -85,7 +85,7 @@ class Retry {
 	/**
 	 * Clean up the retry attempts information from Redis
 	 * 
-	 * @param 	Resque_Job 	$job
+	 * @param 	\Resque_Job 	$job
 	 */
 	protected function cleanRetryKey($job) {
 		$retryKey = $this->redisRetryKey($job);
@@ -96,7 +96,7 @@ class Retry {
 	/**
 	 * Return the redis key used to track retries
 	 * 
-	 * @param 	Resque_Job 	$job
+	 * @param 	\Resque_Job 	$job
 	 * @param 	string
 	 */
 	protected function redisRetryKey($job) {
@@ -114,8 +114,8 @@ class Retry {
 	/**
 	 * Test whether the retry criteria are valid
 	 *
-	 * @param  	Exception 	$exception
-	 * @param 	Resque_Job 	$job
+	 * @param  	\Exception 	$exception
+	 * @param 	\Resque_Job 	$job
 	 * @return  boolean
 	 */
 	protected function retryCriteriaValid($exception, $job) {
@@ -130,8 +130,8 @@ class Retry {
 	 * Check whether this exception should be retried. Will retry all exceptions
 	 * when no specific exceptions are defined.
 	 *
-	 * @param 	Exception 	$e 		exception thrown in job
-	 * @param 	Resque_Job 	$job
+	 * @param 	\Exception 	$e 		exception thrown in job
+	 * @param 	\Resque_Job 	$job
 	 * @return 	boolean
 	 */
 	protected function retryException($exception, $job) {
@@ -155,7 +155,7 @@ class Retry {
 	 * Get the exceptions defined on the job instance for which this job shoud be 
 	 * retried when it fails.
 	 *
-	 * @param 	Resque_Job 	$job
+	 * @param 	\Resque_Job 	$job
 	 * @return 	array,null 	classnames of exceptions or null
 	 */
 
@@ -166,7 +166,7 @@ class Retry {
 	/**
 	 * Check whether the retry limit has been reached
 	 *
-	 * @param  	Resque_Job	$job
+	 * @param  	\Resque_Job	$job
 	 * @return  boolean
 	 */
 	protected function retryLimitReached($job) {
@@ -184,7 +184,7 @@ class Retry {
 	/**
 	 * Get the retry delay from the job, defaults to 0
 	 *
-	 * @param 	Resque_Job 	$job
+	 * @param 	\Resque_Job 	$job
 	 * @return  int 		retry delay in seconds
 	 */
 	protected function retryLimit($job) {
@@ -194,7 +194,7 @@ class Retry {
 	/**
 	 * Get the retry delay from the job, defaults to 0
 	 *
-	 * @param 	Resque_Job 	$job
+	 * @param 	\Resque_Job 	$job
 	 * @return  int 		retry delay in seconds
 	 */
 	protected function retryDelay($job) {
