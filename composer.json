@@ -3,8 +3,7 @@
     "description": "A php-resque plugin; provides retry, delay and exponential backoff support to php-resque jobs",
     "require": {
         "chrisboulton/php-resque": "dev-master",
-        "chrisboulton/php-resque-scheduler": "dev-master",
-        "jaaprood/php-resque-plugin": "dev-master"
+        "chrisboulton/php-resque-scheduler": "dev-master"
     },
     "license": "MIT",
     "authors": [
