@@ -48,7 +48,7 @@ class ExponentialRetry extends Retry {
 	 * @return  array 		retry limit
 	 */
 	protected function backoffStrategy($job) {
-		$defaultStrategy = array(0, 60, 600, 3600, 10800, 21600, 43200);
+		$defaultStrategy = array(0, 60, 600, 1200, 1800, 3600, 10800, 21600, 43200);
 		return $this->getInstanceProperty($job, 'backoffStrategy', $defaultStrategy);
 	}
 }
